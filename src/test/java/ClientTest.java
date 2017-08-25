@@ -21,15 +21,15 @@ public class ClientTest {
 
     @Test
     public void Client_instanciatesCorrectly_true() {
-        Client testClient = new Client("Jane");
+        Client testClient = new Client("Jane", 1);
         assertTrue(testClient instanceof Client);
     }
 
     @Test
     public void all_returnsAllInstancesOfClient_true() {
-        Client firstClient = new Client("Jane");
+        Client firstClient = new Client("Jane", 1);
         firstClient.save();
-        Client secondClient = new Client("Stella");
+        Client secondClient = new Client("Stella", 1);
         secondClient.save();
         assertEquals(true, Client.all().get(0).equals(firstClient));
         assertEquals(true, Client.all().get(1).equals(secondClient));
@@ -37,34 +37,34 @@ public class ClientTest {
 
     @Test
     public void equals_returnsTrueIfNamesAreTheSame() {
-        Client firstClient = new Client("Jane");
-        Client secondClient = new Client("Jane");
+        Client firstClient = new Client("Jane", 1);
+        Client secondClient = new Client("Jane", 1);
         assertTrue(firstClient.equals(secondClient));
     }
 
     @Test
     public void Client_instanciatesWithName_String() {
-        Client testClient = new Client("Jane");
+        Client testClient = new Client("Jane", 1);
         assertEquals("Jane", testClient.getName());
     }
 
     @Test
     public void getId_clientInstanciatesWithId_int() {
-        Client testClient = new Client("Jane");
+        Client testClient = new Client("Jane", 1);
         testClient.save();
         assertTrue(testClient.getId() > 0);
     }
 
     @Test
     public void save_returnsTrueIfNamesAreSaved() {
-        Client testClient = new Client("Jane");
+        Client testClient = new Client("Jane", 1);
         testClient.save();
         assertTrue(Client.all().get(0).equals(testClient));
     }
 
     @Test
     public void save_assignIdToClient() {
-        Client testClient = new Client("Jane");
+        Client testClient = new Client("Jane", 1);
         testClient.save();
         Client savedClient = Client.all().get(0);
         assertEquals(testClient.getId(), savedClient.getId());
@@ -72,10 +72,20 @@ public class ClientTest {
 
     @Test
     public void find_returnsClientWithSameId() {
-        Client firstClient = new Client("Jane");
+        Client firstClient = new Client("Jane", 1);
         firstClient.save();
-        Client secondClient = new Client("Stella");
+        Client secondClient = new Client("Stella", 1);
         secondClient.save();
         assertEquals(Client.find(secondClient.getId()), secondClient);
+    }
+
+    @Test
+    public void save_savesStylistIdIntoDatabase_true() {
+        Stylist testStylist = new Stylist("Sheila");
+        testStylist.save();
+        Client testClient = new Client("Jane", testStylist.getId());
+        testClient.save();
+        Client savedClient = Client.find(testClient.getId());
+        assertEquals(savedClient.getStylistId(), testStylist.getId());
     }
 }
