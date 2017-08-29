@@ -1,10 +1,14 @@
 <div class="col-8 col-offset-2">
-    <h1>$stylist.getName()</h1>
+    <h1>$stylist.getStylistName()</h1>
 
+    <h3>$stylist.getStylistName()'s clients:</h3>
     <div class="row">
-        <div class="col-3">
-            <h3>$stylist.getName()'s clients:</h3>
-            
+        <div class="col-4 d-flex p-2">
+            <ul>
+            #foreach ($client in $stylist.getClients())
+                <li><h4>$client.getClientName()</h4></li>
+            #end
+            </ul>
         </div>
     </div>
 </div>

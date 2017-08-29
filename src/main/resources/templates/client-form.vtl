@@ -3,15 +3,15 @@
         <form action="/clients" method="post">
             <div class="form-group">
                 <label for="stylistId">Select a stylist</label>
-                <select name="stylistId" id="stylistId">
+                <select name="stylistId" id="stylistId" type="text">
                     #foreach ($stylist in $stylists)
-                        <option value="$stylist.getId()" class="form-control">$stylist.getName()</option>
+                        <option value="$stylist.getId()" class="form-control">$stylist.getStylistName()</option>
                     #end
                 </select>
             </div>
             <div class="form-group">
                 <label for="name">Client name</label>
-                <input id="name" name="name" type="text">
+                <input id="name" name="name" type="text" class="form-control">
             </div>
 
             <button class="btn btn-success btn-sm" type="submit">New Client</button>

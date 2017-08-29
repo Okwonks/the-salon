@@ -28,6 +28,13 @@ public class App {
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
+        get("/clients/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("stylists", Stylist.all());
+            model.put("template", "templates/client-form.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
         get("/stylists/new", (request, response) -> { //adding stylists to the list
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("template", "templates/stylist-form.vtl");
@@ -36,8 +43,8 @@ public class App {
 
         post("/stylists", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            String name = request.params("name");
-            Stylist newStylist = new Stylist(name);
+            String stylistName = request.queryParams("name");
+            Stylist newStylist = new Stylist(stylistName);
             newStylist.save();
             model.put("template", "templates/added-stylist.vtl");
             return new ModelAndView(model, layout);
@@ -60,7 +67,7 @@ public class App {
 
         post("/clients", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            Stylist stylist = Stylist.find(Integer.parseInt(request.params("stylistId")));
+            Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
 
             String name = request.queryParams("name");
             Client newClient = new Client(name, stylist.getId());
@@ -71,7 +78,7 @@ public class App {
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        get("/stylists/:id/client/new", (request, response) -> {
+        get("/stylists/:id/clients/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
             model.put("stylist", stylist);
