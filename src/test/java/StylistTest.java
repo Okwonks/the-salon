@@ -29,7 +29,7 @@ public class StylistTest {
     @Test
     public void Stylist_stylistsInstanciateWithAName_String() {
         Stylist testStylist = new Stylist("Sheila");
-        assertEquals("Sheila", testStylist.getName());
+        assertEquals("Sheila", testStylist.getStylistName());
     }
  
     //Tests before the save are not dependent on the save()
@@ -98,7 +98,7 @@ public class StylistTest {
         Stylist testStylist = new Stylist("Sheila");
         testStylist.save();
         testStylist.update("Sheila Stark");
-        assertEquals("Sheila Stark", Stylist.find(testStylist.getId()).getName());
+        assertEquals("Sheila Stark", Stylist.find(testStylist.getId()).getStylistName());
     }
 
     @Test

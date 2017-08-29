@@ -11,7 +11,7 @@ public class Stylist {
         this.name = name;
     }
 
-    public String getName() {
+    public String getStylistName() {
         return name;
     }
 
@@ -42,7 +42,7 @@ public class Stylist {
             return false;
         } else {
             Stylist newStylist = (Stylist) otherStylist;
-            return this.getName().equals(newStylist.getName()) &&
+            return this.getStylistName().equals(newStylist.getStylistName()) &&
                    this.getId() == newStylist.getId();
         }
     }

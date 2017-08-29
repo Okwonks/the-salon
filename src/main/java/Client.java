@@ -12,7 +12,7 @@ public class Client {
         this.stylistId = stylistId;
     }
 
-    public String getName() {
+    public String getClientName() {
         return name;
     }
 
@@ -37,7 +37,7 @@ public class Client {
             return false;
         } else {
             Client newClient = (Client) otherClient;
-            return this.getName().equals(newClient.getName()) &&
+            return this.getClientName().equals(newClient.getClientName()) &&
                    this.getId() == newClient.getId() &&
                    this.getStylistId() == newClient.getStylistId();
         }
