@@ -1,0 +1,1 @@
+web: .build/install/hairjava/bin/hairjava
