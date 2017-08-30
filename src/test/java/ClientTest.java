@@ -45,7 +45,7 @@ public class ClientTest {
 
     @Test
     public void save_returnsTrueIfNamesAreSaved() {
-        Client testClient = new Client("Jane", 1);
+        Client testClient = new Client("Jane", 4);
         testClient.save();
         assertTrue(Client.all().get(0).equals(testClient));
     }
