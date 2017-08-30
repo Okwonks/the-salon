@@ -1,1 +1,1 @@
-web: .build/install/hairjava/bin/hairjava
+web: ./build/install/hairjava/bin/hairjava
