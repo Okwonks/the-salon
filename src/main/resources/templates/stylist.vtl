@@ -1,10 +1,17 @@
-<div class="col-8 col-offset-2">
-    <h1>$stylist.getStylistName()</h1>
-
-    <h3>$stylist.getStylistName()'s clients:</h3>
+<div class="col-8">
     <div class="row">
-        <div class="col-4 d-flex p-2">
-            <ul>
+        <div class="col-4">
+            <h1>$stylist.getStylistName()</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row p-2" id="stylist-profile">
+        <div class="col-4">
+            <img src="$stylist.getImage()" alt="$stylist.getStylistName()" class="rounded img-fluid">
+        </div>
+        <div class="col-4">
+        <h3>$stylist.getStylistName()'s clients:</h3>
+            <ul id="client-list">
             #foreach ($client in $stylist.getClients())
                 <li><h4>$client.getClientName()</h4></li>
             #end
