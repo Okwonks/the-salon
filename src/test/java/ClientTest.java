@@ -4,20 +4,8 @@ import static org.junit.Assert.*;
 
 public class ClientTest {
     
-    @Before
-    public void setUp() {
-        DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", "albert", "2525");
-    }
-
-    @After
-    public void tearDown() {
-        try (Connection con = DB.sql2o.open()) {
-            String deleteClientQuery = "DELETE FROM clients *;";
-            String deleteStylistQuery = "DELETE FROM stylists *;";
-            con.createQuery(deleteClientQuery).executeUpdate();
-            con.createQuery(deleteStylistQuery).executeUpdate();
-        }
-    }
+    @Rule
+    public DatabaseRule database = new DatabaseRule();
 
     @Test
     public void Client_instanciatesCorrectly_true() {
@@ -81,7 +69,7 @@ public class ClientTest {
 
     @Test
     public void save_savesStylistIdIntoDatabase_true() {
-        Stylist testStylist = new Stylist("Sheila");
+        Stylist testStylist = new Stylist("Sheila", "Braiding", "image-url");
         testStylist.save();
         Client testClient = new Client("Jane", testStylist.getId());
         testClient.save();
