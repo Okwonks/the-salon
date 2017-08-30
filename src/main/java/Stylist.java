@@ -5,14 +5,24 @@ public class Stylist {
     private String name;
     private int id;
     private String speciality;
-    private int available;
+    private String image;
 
-    public Stylist(String name) {
+    public Stylist(String name, String speciality, String image) {
         this.name = name;
+        this.speciality = speciality;
+        this.image = image;
     }
 
     public String getStylistName() {
         return name;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public int getId() {
@@ -20,7 +30,7 @@ public class Stylist {
     }
 
     public static List<Stylist> all() {
-        String sql = "SELECT id, name FROM stylists";
+        String sql = "SELECT id, name, speciality, image FROM stylists";
         try(Connection con = DB.sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Stylist.class);
         }
@@ -28,9 +38,11 @@ public class Stylist {
 
     public void save() {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO stylists (name) VALUES (:name)";
+            String sql = "INSERT INTO stylists (name, speciality, image) VALUES (:name, :speciality, :image)";
             this.id = (int) con.createQuery(sql, true)
               .addParameter("name", this.name)
+              .addParameter("speciality", this.speciality)
+              .addParameter("image", this.image)
               .executeUpdate()
               .getKey();
         }
