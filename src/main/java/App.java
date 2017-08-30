@@ -44,7 +44,9 @@ public class App {
         post("/stylists", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             String stylistName = request.queryParams("name");
-            Stylist newStylist = new Stylist(stylistName);
+            String speciality = request.queryParams("speciality");
+            String image = request.queryParams("image");
+            Stylist newStylist = new Stylist(stylistName, speciality, image);
             newStylist.save();
             model.put("template", "templates/added-stylist.vtl");
             return new ModelAndView(model, layout);
